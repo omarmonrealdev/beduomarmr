@@ -1,3 +1,4 @@
+//importacion del archivo .env
 require("dotenv").config();
 
 const { initDatabase } = require("./db");
