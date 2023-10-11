@@ -1,0 +1,29 @@
+name: Continuos Integration/Continuous Delivery
+
+#Configurar que se hace en cada push (cuando trabajas individual)
+#on: [push]
+
+#Configurar que se hace en cada push solo a rama master (para trabajo en equipo)
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  #Nombre del proceso a jeecutar
+  continuos-integration:
+    # el proceso que va ejecutarse sobre una instancia/contenedor de ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      #Clona el codigo utilizando un action oficial de Github
+      - name: Clonar la ultima version del codigo
+        uses: actions/checkout@v4
+
+      #Configura el Ubuntu para utilizar Node.js
+      - name: Ejecutar las pruebas en un ambiente de Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      #Correr los comandos de Node.js para asegurar la integridad del codigo
+      - run: npm install
